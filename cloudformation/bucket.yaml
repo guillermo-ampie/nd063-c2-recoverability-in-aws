@@ -1,0 +1,35 @@
+Description: >
+  Project: Recoverability in AWS 
+  Create an S3 bucket with versioning enabled as a static Web site
+
+
+Parameters:
+  BUCKETNAME:
+    Description: The bucket's name
+    Type: String
+
+
+Resources:
+
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${BUCKETNAME}"
+      AccessControl: PublicRead
+      VersioningConfiguration:
+        Status: Enabled
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
+
+  WebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref 'WebsiteBucket'
+      PolicyDocument:
+        Statement:
+        - Sid: PublicReadForGetBucketObjects
+          Effect: Allow
+          Principal: '*'
+          Action: s3:GetObject
+          Resource: !Join ['', ['arn:aws:s3:::', !Ref 'WebsiteBucket', /*]]
