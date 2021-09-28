@@ -1,0 +1,82 @@
+1.- VPC screenshots:
+    1.1.- primary_Vpc.png:      Primary
+    1.2.- secondary_Vpc.png:    Secondary
+
+2.- Highly durable RDS Database
+    2.1.- primaryDB_config.png
+    2.2.- secondaryDB_config.png
+    2.3.- primaryDB_subnetgroup.png:    primary-subnet-group-01
+    2.4.- secondaryDB_subnetgroup.png:  secondary-subnet-group-01
+    2.5.- primaryVPC_subnets.png
+    2.6.- secondaryVPC_subnets.png
+    2.7.- primary_subnet_routing.png
+    2.8.- secondary_subnet_routing.png
+
+3.- Availability Estimate:
+    3.1.- estimates.txt
+
+4.- Demonstrate normal usage:
+    3.2.- log_primary.txt
+
+5.- Monitor database:
+    5.1.- monitoring_connections.png
+    5.2.- monitoring_replications.png
+
+6.- Failover and Recovery (before promotion):
+    6.2.- log_rr_before_promotion.txt
+    6.3.- rr_before_promotion.png
+    
+7.- Failover and Recovery: (after promotion):
+    7.1.- log_rr_after_promotion.txt
+    7.2.- rr_after_promotion.png
+
+8.- Website:
+    8.1.- s3_original.png
+    8.2.- s3_season.png
+    8.3.- s3_season_revert.png
+    8.4.- s3_deletion.png
+    8.5.- s3_delete_marker.png
+    8.6.- s3_delete_revert.png
+
+=================
+DB Server credentials and commands:
+    - master username: YOUR_MASTER_USERNAME
+    - master password: YOUR_PASSWORD
+    - DB instance: 
+        - name: database-1
+        - endpoint:
+        - port:3306
+    - DB replica: 
+        - name: replica-1
+        - endpoint:
+        - port: 3306
+    - instance class: burstable
+    - database name: udacity
+    - database security group: UDARR-Database
+
+EC2:
+    - install:
+        sudo yum update -y
+        sudo yum install -y mysql #The traditional mysql client
+
+SQL:
+    - connect to DB primary instance: mysql -h <instance_endpoint> -P 3306 -u admin -p
+    - connect to DB replica instance: mysql -h <instance_endpoint> -P 3306 -u admin -p
+
+SHOW DATABASES;
+USE udacity;
+
+CREATE TABLE IF NOT EXISTS pets (
+  pet_id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(128) NOT NULL,
+  owner VARCHAR(128)
+);
+
+DESCRIBE pets;
+INSERT INTO pets(name, owner) VALUES ('Hedwig', 'Harry Potter');
+INSERT INTO pets(name, owner) VALUES ('Fawkes', 'Dumbledore');
+
+INSERT INTO pets(name, owner) VALUES ('Nagini', 'Voldemort');
+
+SELECT * FROM pets;
+
