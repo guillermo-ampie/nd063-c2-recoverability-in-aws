@@ -1,3 +1,8 @@
+NAMED PROFILES IN AWS CLI 
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+
+DELIVERABLES
+
 1.- VPC screenshots:
     1.1.- primary_Vpc.png:      Primary
     1.2.- secondary_Vpc.png:    Secondary
