@@ -1,5 +1,6 @@
 NAMED PROFILES IN AWS CLI 
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+export AWS_PROFILE=arch
 
 DELIVERABLES
 
@@ -42,7 +43,11 @@ DELIVERABLES
     8.4.- s3_deletion.png
     8.5.- s3_delete_marker.png
     8.6.- s3_delete_revert.png
-
+=================
+TODO:
+    - Launch RDS instance using CloudFormation
+    - Remember to create the RDS Subnet group, name: db-sg-private
+    - Launch the bastion host using CloudFormation
 =================
 DB Server credentials and commands:
     - master username: YOUR_MASTER_USERNAME
@@ -68,6 +73,10 @@ SQL:
     - connect to DB primary instance: mysql -h <instance_endpoint> -P 3306 -u admin -p
     - connect to DB replica instance: mysql -h <instance_endpoint> -P 3306 -u admin -p
 
+# To create a database from the mysql cli:
+CREATE DATABASE udacity;
+
+# Select your database
 SHOW DATABASES;
 USE udacity;
 
